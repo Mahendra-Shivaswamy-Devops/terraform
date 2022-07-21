@@ -4,6 +4,7 @@ resource "kubernetes_service" "nginx" {
   metadata {
     labels = {
       app = "nginx"
+      release = "${var.version_num}"
     }
     annotations = {
       "external-dns.alpha.kubernetes.io/hostname" = "int-1.test-1.rr.mu"
@@ -20,6 +21,7 @@ resource "kubernetes_service" "nginx" {
     }
     selector = {
       app = "nginx"
+      release = "${var.version_num}"
     }
     type = "ClusterIP"
     #type = "LoadBalancer"

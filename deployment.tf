@@ -4,6 +4,7 @@ resource "kubernetes_deployment" "nginx" {
     namespace = "devops-interview"
     labels = {
       app = "nginx"
+      release = "${var.version_num}"
     }
   }
 
@@ -13,6 +14,7 @@ resource "kubernetes_deployment" "nginx" {
     selector {
       match_labels = {
         app = "nginx"
+        release = "${var.version_num}"
       }
     }
 
@@ -20,6 +22,7 @@ resource "kubernetes_deployment" "nginx" {
       metadata {
         labels = {
           app = "nginx"
+          release = "${var.version_num}"
         }
       }
 
@@ -32,8 +35,7 @@ resource "kubernetes_deployment" "nginx" {
         }
 
         container {
-          #image = "nginx:1.21.6"
-          image = "mahendrashivaswamy/cicd:1.0.0"
+          image = "mahendrashivaswamy/cicd:${var.version_num}"
           name  = "nginx"
        
           env_from {
